@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>Incluyendo JS en HTML5</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		
+		<!--script src="index.js"> </script-->
+		<script src="vue.js"></script>
+    </head>
+    <body>
+		<div id="app"> 
+			<div class="cointainer-fluid">
+				<h2>{{ title }}</h2>
+				<div class="form-inline">
+					<label>Tarea:</label>
+					<input @keyup.13="addTask" v-model="newTask" type="text" class="form-control" placeholder="Ingrese la Tarea">
+					<a v-on:click="addTask" class="btn btn-primary">Agregar</a>
+				</div>
+
+				
+							<h1>Todas <span class="pull-right badge">{{ tasks.length }} </span></h1>
+	
+				<ul class="list-group">
+					<li class="list-group-item" v-for="task in tasks">
+					{{ task.name }}
+					<span class="pull-right">
+						<a href="javascript:;" @click="makeAsDone(task)" class="glyphicon glyphicon-ok"></a>
+						<a href="javascript:;" @click="deleteTask(task)" class="glyphicon glyphicon-trash"></a>						
+						<a  v-on:click="editarTask(task)"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp; </a> 
+   
+					</span>
+					</li>
+				</ul>
+				
+				
+				
+			<h1>TAREAS ACTIVAS <span class="pull-right badge">{{ activeTask.length }} </span></h1>
+	
+				<ul class="list-group">
+					<li class="list-group-item" v-for="task in activeTask">
+					{{ task.name }}
+					<span class="pull-right">
+						<a href="javascript:;" @click="makeAsDone(task)" class="glyphicon glyphicon-ok"></a>
+						<a href="javascript:;" @click="deleteTask(task)" class="glyphicon glyphicon-trash"></a>
+					</span>
+					</li>
+				</ul>
+				
+				
+			<h1>TAREAS INACTIVAS <span class="pull-right badge">{{ inactiveTask.length }} </span></h1>
+				<ul class="list-group">
+					<li class="list-group-item" v-for="task in inactiveTask">
+					{{ task.name }}
+					<span class="pull-right">
+						<a href="javascript:;" @click="makeAsDone(task)" class="glyphicon glyphicon-ok"></a>
+						<a href="javascript:;" @click="deleteTask(task)" class="glyphicon glyphicon-trash"></a>
+					</span>
+					</li>
+				</ul>
+				
+				
+				
+			</div>
+			
+			<div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Editar tarea</h4>
+      </div>
+      <div class="modal-body">
+
+         <input type="text" id="txtEdicionNombre" class="form-control" v-model="editTask">
+ 
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="GuardarEdicion" v-on:click="GuardarEdicion">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+			
+		 
+			
+			
+		</div>
+		<script src="index.js"></script>
+	</body>
+</html>
